@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {NavLink, Route} from 'react-router-dom';
+import styles from './App.module.scss';
+import {Header} from "./components/header/Header";
+import {Nav} from "./components/nav/Nav";
+import {Releases} from "./components/newRelease/NewRelease";
+import {Search} from "./components/sezrch/Search";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className={styles.app}>
+          <Header />
+          <Search />
+          <Nav />
+              <div className={styles.appWrapperContent}>
+                  <Route path='/main' render={() => <Releases/>}/>
+                  <Route path='/trending' render={() => <div>trending</div>}/>
+                  <Route path='/soon' render={() => <div>soon</div>}/>
+                  <Route path='/favorite' render={() => <div>favorite</div>}/>
+              </div>
+
+      </div>
+
   );
 }
 

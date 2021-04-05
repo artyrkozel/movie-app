@@ -1,0 +1,24 @@
+@import './src/scss/reset';
+@import './src/scss/fonts';
+@import './src/scss/global';
+.app {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas:
+          "header search"
+          "menu c";
+}
+
+.appWrapper {
+  //display: grid;
+  //grid-template-columns: 2fr 10fr;
+  //grid-template-areas:
+  //
+  //        "n c";
+}
+
+.appWrapperContent{
+  grid-area: c;
+  background-color: #3D3A3E;
+  padding: 20px;
+}
