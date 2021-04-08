@@ -1,0 +1,29 @@
+.movieItem{
+  position: relative;
+  &:after{
+    content: '';
+    background-color: black;
+  }
+  .voteAverage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #000;
+    transform: translate(50%, 50%);
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .poster{
+    display: block;
+    width: 250px;
+    position: relative;
+    img {
+      width: 100%;
+    }
+  }
+  .filmTitle{
+    color: #fff;
+  }
+}

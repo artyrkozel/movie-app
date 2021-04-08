@@ -1,0 +1,45 @@
+.movieItem{
+  .movieItemInner{
+    display: flex;
+    .listDetails{
+      .listDetailsItem{
+        margin-top: 15px;
+        p {
+          margin-bottom: 7px;
+        }
+        button {
+          background: transparent;
+          border: 1px solid #fff;
+          padding: 5px;
+        }
+        span{
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  .moviePoster{
+    width: 320px;
+  }
+  .movieInfo{
+    display: block;
+    width: fit-content;
+    padding-left: 35px;
+    .voteStatistics{
+      display: flex;
+      .voteAverage{
+        display: flex;
+        flex-direction: column;
+        margin-right: 40px;
+        text-align: center;
+        .as{
+          font-size: 32px;
+          font-weight: 700;
+        }
+    }
+    }
+    .storyLine{
+      margin-top: 20px;
+    }
+  }
+}

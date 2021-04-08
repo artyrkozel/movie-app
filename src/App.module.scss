@@ -1,7 +1,10 @@
 @import './src/scss/reset';
 @import './src/scss/fonts';
 @import './src/scss/global';
+@import './src/scss/vars';
+
 .app {
+  //background-image: url("./common/image/bg.jpg");
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
@@ -9,16 +12,8 @@
           "menu c";
 }
 
-.appWrapper {
-  //display: grid;
-  //grid-template-columns: 2fr 10fr;
-  //grid-template-areas:
-  //
-  //        "n c";
-}
-
 .appWrapperContent{
   grid-area: c;
   background-color: #3D3A3E;
-  padding: 20px;
+  padding: 90px 90px;
 }
