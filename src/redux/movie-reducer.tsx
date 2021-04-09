@@ -97,11 +97,21 @@ export const SET_SEARCH_MOVIE = 'SET_SEARCH_MOVIE'
 export const FETCH_TRAILER = 'FETCH_TRAILER'
 export const SET_TRAILER = 'SET_TRAILER'
 
+export const CHANGE_IS_FETCHING = 'CHANGE_IS_FETCHING'
+
 let initialState = {
     upcomingMovie: [] as Array<movieItemType>,
     movieDetail: {} as detailsMovie,
     search: [] as Array<searchItem>,
-    movieTrailer: [] as Array<movieTrailerType>
+    movieTrailer: [] as Array<movieTrailerType>,
+    isFetching : false
+}
+
+export const ChangeIsFetchingValueAC = (value: boolean) => {
+    return {
+        type: CHANGE_IS_FETCHING,
+        value
+    }
 }
 
 export const FetchMovieAC = () => {
@@ -179,6 +189,11 @@ const movieReducer = (state: InitialType = initialState, action: any): InitialTy
             return {
                 ...state,
                 movieTrailer: action.details
+            }
+        case CHANGE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.value
             }
         default:
             return state

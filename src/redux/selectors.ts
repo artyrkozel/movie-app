@@ -13,3 +13,6 @@ export const getSearchMovie = (state: AppRootStateType) => {
 export const getTrailer = (state: AppRootStateType) => {
     return  state.movie.movieTrailer
 }
+export const getIsFetchingValue = (state: AppRootStateType) => {
+    return  state.movie.isFetching
+}

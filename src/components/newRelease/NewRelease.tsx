@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import styles from './releases.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {FetchMovieAC, setMovieAC, movieItemType} from "../../redux/movie-reducer";
-import {getMovie} from "../../redux/selectors";
+import {getIsFetchingValue, getMovie} from "../../redux/selectors";
 import {MovieItem} from "../../common/movieItem/MovieItem";
+import {Preloader} from "../../common/preloader/Preloader";
 
 export const Releases = () => {
     const movie = useSelector(getMovie)
-    console.log(movie)
+    const isFetching = useSelector(getIsFetchingValue)
     const arrOfId = [
         {id: 28, name: "Action"},
         {id: 12, name: "Adventure"},
@@ -30,25 +31,18 @@ export const Releases = () => {
         {id: 37, name: "Western"}
     ]
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(FetchMovieAC())
     }, [dispatch])
 
-    const compareIds = (genreId: number) => {
-        const newArr = [] as Array<movieItemType>
-        movie.map(el => {
-            if (el.genre_ids.includes(genreId)){
-                newArr.push(el)
-            }
-        })
-        console.log(newArr)
-        return newArr
-    }
+    const [id, setId] = useState<number | null>(null)
+    const filteredArr = movie.filter(el => id !== null? el.genre_ids.includes(id) : el)
     const genreHandleChange = (event: React.ChangeEvent<{ value: any }>) => {
         arrOfId.map((el) => {
             if (el.name === event.target.value){
                 let id = el.id
-                compareIds(id)
+                setId(id)
             }
         })
     }
@@ -63,7 +57,7 @@ export const Releases = () => {
 
     const filterRatingHandler = () => dispatch(setMovieAC(filterByRating(movie)))
     const filterTitleHandler = () => dispatch(setMovieAC(filterByName(movie)))
-    //const [value, setValue] = useState(80)
+    if(isFetching){return <Preloader />}
     return (
         <div className={styles.releases}>
             <h2 className={styles.mainTitle}>New Releases</h2>
@@ -74,7 +68,7 @@ export const Releases = () => {
                 {arrOfId.map((el) => <option key={el.id}>{el.name}</option>)}
             </select>
             <div className={styles.releasesInner}>
-                {movie.map((film) => <MovieItem id={film.id} original_title={film.original_title} poster_path={film.poster_path} vote_average={film.vote_average}/>)}
+                {filteredArr.map((film) => <MovieItem id={film.id} original_title={film.original_title} poster_path={film.poster_path} vote_average={film.vote_average}/>)}
             </div>
         </div>
     )

@@ -3,7 +3,10 @@ import styles from './details.module.scss'
 import { useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {FetchMovieDetailsAC, FetchTrailer} from "../../redux/movie-reducer";
-import {getMovieDetails, getTrailer} from "../../redux/selectors";
+import {getIsFetchingValue, getMovieDetails, getTrailer} from "../../redux/selectors";
+import {Preloader} from "../../common/preloader/Preloader";
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 export const Details = () => {
     const {id} = useParams<{ id: any }>()
@@ -14,8 +17,12 @@ export const Details = () => {
     },[dispatch, id])
     const movieDetails = useSelector(getMovieDetails)
     const movieTrailer = useSelector(getTrailer)
+    const isFetching = useSelector(getIsFetchingValue)
+
     const trailer = movieTrailer[0]
     const movieImgPath = 'https://image.tmdb.org/t/p/w500/'
+
+    if(isFetching){return <Preloader />}
     return (
         <div className={styles.movieItem}>
             <div className={styles.movieItemInner}>
@@ -40,12 +47,15 @@ export const Details = () => {
                         </div>
                         <div className={styles.listDetailsItem}>
                             <p>County:</p>
-                            {/*<span>{movieDetails.production_countries[0].name}</span>*/}
+                            {/*{movieDetails && <span>{movieDetails?.production_countries[0]?.name}</span>}*/}
                         </div>
                     </div>
                 </div>
                 <div className={styles.movieInfo}>
                     <h2>{movieDetails.title}</h2>
+                    <Box component="fieldset" mb={3} borderColor="transparent">
+                        <Rating name="half-rating" defaultValue={movieDetails.vote_average} precision={0.1} readOnly max={10}/>
+                    </Box>
                     <div className={styles.voteStatistics}>
                         <div className={styles.voteAverage}>
                             <span className={styles.as}>{movieDetails.vote_average}</span>
@@ -66,7 +76,7 @@ export const Details = () => {
                     </div>
                     <div className={styles.trailerItem}>
                         <h2>Trailer</h2>
-                        {/*<iframe src={`https://www.youtube.com/embed/${trailer.key}`} width={640} height={360} frameBorder="0">rere</iframe>*/}
+                        {/*<iframe src={`https://www.youtube.com/embed/${trailer.key}`} width={640} height={360} frameBorder="0"></iframe>*/}
                     </div>
 
                 </div>

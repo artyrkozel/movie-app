@@ -4,12 +4,19 @@
 @import './src/scss/vars';
 
 .app {
-  //background-image: url("./common/image/bg.jpg");
+  background-image: url("./common/image/bg.jpg");
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
           "header search"
           "menu c";
+  &:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    background-color: #000;
+    opacity: .7;
+  }
 }
 
 .appWrapperContent{

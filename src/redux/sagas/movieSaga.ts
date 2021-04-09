@@ -1,6 +1,6 @@
 import {put, call, takeEvery} from 'redux-saga/effects'
 import { movieApi } from '../../api/api'
-import {FETCH_DETAILS, FETCH_UPCOMING_MOVIE, setMovieAC, setMovieDetailsAC, FETCH_SEARCH_MOVIE, setSearchMovieAC, FETCH_TRAILER, setTrailerAC} from "../movie-reducer";
+import {FETCH_DETAILS, FETCH_UPCOMING_MOVIE, setMovieAC, setMovieDetailsAC, FETCH_SEARCH_MOVIE, setSearchMovieAC, FETCH_TRAILER, setTrailerAC, ChangeIsFetchingValueAC} from "../movie-reducer";
 
 function* fetchUpcomingMovie() {
     // @ts-ignore
@@ -9,10 +9,11 @@ function* fetchUpcomingMovie() {
 }
 
 function* fetchMovieDetails(action: any){
-    debugger
+    yield put(ChangeIsFetchingValueAC(true))
     // @ts-ignore
     let res = yield call(() => movieApi.getMovieDetails(action.movieId))
     yield put(setMovieDetailsAC(res.data))
+    yield put(ChangeIsFetchingValueAC(false))
 }
 
 function* fetchSearchMovie(action: any){

@@ -1,11 +1,31 @@
 .movieItem{
   position: relative;
-  &:after{
-    content: '';
-    background-color: black;
+  margin-right: 45px;
+  width: 250px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: .6s;
+  cursor: pointer;
+
+  button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    z-index: 3;
+    transition: .5s;
   }
+  &:hover{
+    transition: .3s;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    button{
+      opacity: 1;
+      z-index: 9;
+    }
+  }
+
   .voteAverage {
     position: absolute;
+    z-index: 3;
     top: 0;
     right: 0;
     color: #000;
@@ -17,10 +37,18 @@
   }
   .poster{
     display: block;
-    width: 250px;
+    max-height: 375px;
     position: relative;
+    z-index: 3;
     img {
       width: 100%;
+    }
+    .btn{
+      position: relative;
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.5s all
     }
   }
   .filmTitle{
