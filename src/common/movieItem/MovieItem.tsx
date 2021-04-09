@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {NavLink} from "react-router-dom";
 import styles from './movieItem.module.scss'
 import placeholder from './../image/placeholder.png'
@@ -6,6 +6,11 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import {FetchTrailer} from "../../redux/movie-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {getTrailer} from "../../redux/selectors";
+import {Preloader} from "../preloader/Preloader";
+
 type MovieItemType = {
     id: number
     poster_path: string
@@ -27,17 +32,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-export const MovieItem = (props: MovieItemType) => {
+export const MovieItem = React.memo((props: MovieItemType) => {
+    console.log('render')
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
     const handleOpen = () => {
         setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    }
+    const handleClose = () => setOpen(false);
     const movieImgPath = 'https://image.tmdb.org/t/p/w500/'
     return (
         <div className={styles.movieItem} key={props.id}>
@@ -47,12 +49,10 @@ export const MovieItem = (props: MovieItemType) => {
                         <img src={placeholder} alt="poster"/>}
                     <span className={styles.voteAverage}>{props.vote_average}</span>
                 </div>
+                <h4 className={styles.filmSubTitle}>{props.original_title}</h4>
             </NavLink>
             <div className={styles.filmTitle}>
-                <h4>{props.original_title}</h4>
-                <button type="button" onClick={handleOpen}>
-                    Trailer
-                </button>
+                <button type="button" onClick={handleOpen}>Trailer</button>
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
@@ -67,12 +67,11 @@ export const MovieItem = (props: MovieItemType) => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <h2 id="transition-modal-title">Transition modal</h2>
-                            <p id="transition-modal-description">react-transition-group animates me.</p>
+                            {/*{movieTrailer ? <iframe src={`https://www.youtube.com/embed/${movieTrailer[0].key}`} width={640} height={360} frameBorder="0">g</iframe>: <Preloader />}*/}
                         </div>
                     </Fade>
                 </Modal>
             </div>
         </div>
     )
-}
+})

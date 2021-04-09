@@ -2,11 +2,16 @@
 .releases{
   .mainTitle {
     margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    text-align: center;
+    .subTitle{
+
+    }
   }
   .releasesInner{
-    display: inline-grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

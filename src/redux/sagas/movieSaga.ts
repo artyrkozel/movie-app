@@ -22,8 +22,10 @@ function* fetchSearchMovie(action: any){
     yield put(setSearchMovieAC(res.data.results))
 }
 function* fetchTrailer(action: any){
+    yield put(ChangeIsFetchingValueAC(true))
     // @ts-ignore
     let res = yield call(() => movieApi.getMovieTrailer(action.movieId))
+    yield put(ChangeIsFetchingValueAC(false))
     yield put(setTrailerAC(res.data.results))
 }
 export function* requestMovieWatcher(){

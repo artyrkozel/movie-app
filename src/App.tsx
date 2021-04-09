@@ -1,12 +1,12 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import styles from './App.module.scss';
-import { Details } from './components/details/details';
+import { Details } from './components/details/details'
 import {Header} from "./components/header/Header";
 import {Nav} from "./components/nav/Nav";
 import {Releases} from "./components/newRelease/NewRelease";
-import {Search} from "./components/sezrch/Search";
 import {Result} from "./components/result/Result";
+import {Search} from "./components/search/Search";
 
 
 function App() {

@@ -1,11 +1,11 @@
 .movieItem{
   position: relative;
   margin-right: 45px;
+  margin-bottom: 35px;
   width: 250px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   transition: .6s;
   cursor: pointer;
-
   button{
     position: absolute;
     top: 50%;
@@ -21,6 +21,9 @@
       opacity: 1;
       z-index: 9;
     }
+    .filmSubTitle{
+      color: #fff
+    }
   }
 
   .voteAverage {
@@ -28,10 +31,9 @@
     z-index: 3;
     top: 0;
     right: 0;
-    color: #000;
+    color: #c6c6c6;
     transform: translate(50%, 50%);
-    border: 1px solid #000;
-    background-color: #fff;
+    background-color: #8300ff;
     border-radius: 10px;
     padding: 10px;
   }
@@ -50,6 +52,11 @@
       transform: translateY(30px);
       transition: 0.5s all
     }
+  }
+  .filmSubTitle {
+    margin: 10px;
+    color: #c6c6c6;
+    transition: .5s;
   }
   .filmTitle{
     color: #fff;

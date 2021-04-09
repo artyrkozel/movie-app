@@ -1,0 +1,24 @@
+.search{
+  text-align: left;
+  grid-area: search;
+  background-color: rebeccapurple;
+  display: flex;
+  align-items: center;
+  .submitBtn {
+    cursor: pointer;
+    background: #282828;
+    border-radius: 25px;
+    color: #c6c6c6;
+    float: left;
+    font-weight: 500;
+    margin: 0 20px 0 0;
+    padding: 10px 20px;
+    text-align: center;
+    width: 110px;
+    transition: .5s;
+    &:hover{
+      background-color: #c6c6c6;
+      color: #282828;
+    }
+  }
+}

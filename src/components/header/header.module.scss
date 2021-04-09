@@ -1,9 +1,10 @@
 .header {
   grid-area: header;
-text-align: center;
+  text-align: center;
+  background-color: rebeccapurple;
   .logo {
-    height: 40px;
-    margin: 0 auto;
+    height: 35px;
+    margin: 15px auto;
   }
 }
 

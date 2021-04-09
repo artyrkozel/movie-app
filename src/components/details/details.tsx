@@ -18,10 +18,9 @@ export const Details = () => {
     const movieDetails = useSelector(getMovieDetails)
     const movieTrailer = useSelector(getTrailer)
     const isFetching = useSelector(getIsFetchingValue)
-
     const trailer = movieTrailer[0]
+    console.log(trailer)
     const movieImgPath = 'https://image.tmdb.org/t/p/w500/'
-
     if(isFetching){return <Preloader />}
     return (
         <div className={styles.movieItem}>

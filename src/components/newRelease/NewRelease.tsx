@@ -5,6 +5,7 @@ import {FetchMovieAC, setMovieAC, movieItemType} from "../../redux/movie-reducer
 import {getIsFetchingValue, getMovie} from "../../redux/selectors";
 import {MovieItem} from "../../common/movieItem/MovieItem";
 import {Preloader} from "../../common/preloader/Preloader";
+import {Filter} from "../../common/filterPanel/Filter";
 
 export const Releases = () => {
     const movie = useSelector(getMovie)
@@ -31,42 +32,25 @@ export const Releases = () => {
         {id: 37, name: "Western"}
     ]
     const dispatch = useDispatch()
-
     useEffect(() => {
         dispatch(FetchMovieAC())
     }, [dispatch])
 
     const [id, setId] = useState<number | null>(null)
     const filteredArr = movie.filter(el => id !== null? el.genre_ids.includes(id) : el)
-    const genreHandleChange = (event: React.ChangeEvent<{ value: any }>) => {
-        arrOfId.map((el) => {
-            if (el.name === event.target.value){
-                let id = el.id
-                setId(id)
-            }
-        })
-    }
 
-    let filterByRating = (movie: Array<movieItemType>) => {
-        let ret = movie.slice().sort(function (a,b){
-            return a.vote_average - b.vote_average
-        })
-        return ret.reverse()
-    }
+    const genreHandleChange = (event: React.ChangeEvent<{ value: any }>) => arrOfId.map((el) => el.name === event.target.value ? setId(el.id) : '')
+    let filterByRating = (movie: Array<movieItemType>) => movie.slice().sort(function (a,b){return a.vote_average - b.vote_average}).reverse()
     let filterByName = (movie: Array<movieItemType>) => movie.slice().sort((a,b) => b.original_title.toLowerCase().localeCompare(a.original_title.toLowerCase()))
 
     const filterRatingHandler = () => dispatch(setMovieAC(filterByRating(movie)))
     const filterTitleHandler = () => dispatch(setMovieAC(filterByName(movie)))
     if(isFetching){return <Preloader />}
+
     return (
         <div className={styles.releases}>
             <h2 className={styles.mainTitle}>New Releases</h2>
-            <h3>filtered by</h3>
-            <button onClick={filterRatingHandler}>Rating</button>
-            <button onClick={filterTitleHandler}>Title</button>
-            <select onChange={genreHandleChange}>
-                {arrOfId.map((el) => <option key={el.id}>{el.name}</option>)}
-            </select>
+            <Filter filterRatingHandler={filterRatingHandler} filterTitleHandler={filterTitleHandler} genreHandleChange={genreHandleChange} arrOfId={arrOfId}/>
             <div className={styles.releasesInner}>
                 {filteredArr.map((film) => <MovieItem id={film.id} original_title={film.original_title} poster_path={film.poster_path} vote_average={film.vote_average}/>)}
             </div>

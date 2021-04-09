@@ -1,10 +1,12 @@
 .menu{
   grid-area: menu;
-  width: 100%;
+  max-width: 280px;
+  min-width: 280px;
   min-height: 100vh;
-  background-color: #4E4950;
+  background-color: #454545;
 }
 .menuList{
+  text-align: center;
   margin-top: 50px;
   .menuListItem{
     width: 100%;
@@ -14,7 +16,7 @@
       padding: 10px 15px;
     }
     .active{
-      background-color: #3D3A3E;
+      background-color: #1f1f1f;
       display: block;
       color: #fff
     }
