@@ -1,7 +1,7 @@
 import {AppRootStateType} from "./store";
 
-export const getMovie = (state: AppRootStateType) => {
-    return  state.movie.upcomingMovie
+export const getMovieList = (state: AppRootStateType) => {
+    return  state.movie.movieList
 }
 
 export const getMovieDetails = (state: AppRootStateType) => {
@@ -15,4 +15,10 @@ export const getTrailer = (state: AppRootStateType) => {
 }
 export const getIsFetchingValue = (state: AppRootStateType) => {
     return  state.movie.isFetching
+}
+export const getWatchlist = (state: AppRootStateType) => {
+    return  state.movie.watchlist
+}
+export const getWatchlistCount = (state: AppRootStateType) => {
+    return  state.movie.watchlistCount
 }

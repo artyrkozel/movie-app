@@ -38,12 +38,19 @@ export const Search = () => {
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value)
     }
+    const onKeyPressHandler = (e: any) => {
+        if (e.key === 'Enter') {
+            dispatch(FetchSearchMovieAC(value))
+            setValue('')
+            history.push('/result')
+    }}
     return (
         <div className={styles.search}>
             <TextField
                 type={'text'}
                 value={value}
                 onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
                 className={classes.margin}
                 id="input-with-icon-textfield"
                 placeholder={'Search movie'}
@@ -55,7 +62,7 @@ export const Search = () => {
                     ),
                 }}
             />
-            <a type={'submit'} onClick={onClickHandler} className={styles.submitBtn}>Search</a>
+            <button type={'submit'} onClick={onClickHandler} className={styles.submitBtn}>Search</button>
         </div>
     )
 }

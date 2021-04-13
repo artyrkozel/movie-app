@@ -19,9 +19,10 @@ export const Details = () => {
     const movieTrailer = useSelector(getTrailer)
     const isFetching = useSelector(getIsFetchingValue)
     const trailer = movieTrailer[0]
-    console.log(trailer)
     const movieImgPath = 'https://image.tmdb.org/t/p/w500/'
-    if(isFetching){return <Preloader />}
+    if (isFetching){
+            return <Preloader />
+    }
     return (
         <div className={styles.movieItem}>
             <div className={styles.movieItemInner}>
@@ -32,9 +33,11 @@ export const Details = () => {
                     <div className={styles.listDetails}>
                         <div className={styles.listDetailsItem}>
                             <p>Category:</p>
-                            {movieDetails.genres?.map((el) => {
-                                return <button key={el.id} style={{marginRight: '5px'}}>{el.name}</button>
-                            })}
+                            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                                {movieDetails.genres?.map((el) => {
+                                    return <button key={el.id} style={{marginRight: '5px'}}>{el.name}</button>
+                                })}
+                            </div>
                         </div>
                         <div className={styles.listDetailsItem}>
                             <p>Relies Date:</p>
@@ -46,14 +49,14 @@ export const Details = () => {
                         </div>
                         <div className={styles.listDetailsItem}>
                             <p>County:</p>
-                            {/*{movieDetails && <span>{movieDetails?.production_countries[0]?.name}</span>}*/}
+                            {movieDetails.production_countries !== undefined && <span>{movieDetails.production_countries[0]?.name}</span>}
                         </div>
                     </div>
                 </div>
                 <div className={styles.movieInfo}>
-                    <h2>{movieDetails.title}</h2>
+                    <h2 className={styles.mainTitle}>{movieDetails.title}</h2>
                     <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Rating name="half-rating" defaultValue={movieDetails.vote_average} precision={0.1} readOnly max={10}/>
+                        <Rating name="half-rating" value={movieDetails.vote_average} precision={0.1} readOnly max={10}/>
                     </Box>
                     <div className={styles.voteStatistics}>
                         <div className={styles.voteAverage}>
@@ -69,19 +72,16 @@ export const Details = () => {
                             <span>Budget</span>
                         </div>
                     </div>
-
                     <div className={styles.storyLine}>
+                        <h2 className={styles.divider}>Overview</h2>
                         <p>{movieDetails.overview}</p>
                     </div>
                     <div className={styles.trailerItem}>
                         <h2>Trailer</h2>
-                        {/*<iframe src={`https://www.youtube.com/embed/${trailer.key}`} width={640} height={360} frameBorder="0"></iframe>*/}
+                        {trailer !== undefined ? <iframe src={`https://www.youtube.com/embed/${trailer.key}`} width={640} height={360} frameBorder="0" title={trailer.key}>''</iframe>: <Preloader />}
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     )
 }

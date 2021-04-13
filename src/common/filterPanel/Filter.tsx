@@ -39,8 +39,8 @@ export const Filter:React.FC<FilterPropsType> = ({filterRatingHandler, filterTit
     return(
         <div className={styles.releasesNav}>
             <h3 className={styles.subTitle}>Filters</h3>
-            <a onClick={filterRatingHandler} className={styles.releasesNavBtn}>Rating</a>
-            <a onClick={filterTitleHandler} className={styles.releasesNavBtn}>Title</a>
+            <button onClick={filterRatingHandler} className={styles.releasesNavBtn}>Rating</button>
+            <button onClick={filterTitleHandler} className={styles.releasesNavBtn}>Title</button>
             <FormControl className={classes.formControl}>
                 <NativeSelect
                     onChange={genreHandleChange}

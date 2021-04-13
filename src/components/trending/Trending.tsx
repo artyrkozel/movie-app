@@ -5,21 +5,16 @@ import {getIsFetchingValue, getMovieList} from "../../redux/selectors";
 import {Preloader} from "../../common/preloader/Preloader";
 import {MovieContainer} from "../movieContainer/MovieContainer";
 
-
-export const Releases = () => {
-
-    const movie = useSelector(getMovieList)
+export const Trending = () => {
+    const trendingMovie = useSelector(getMovieList)
     const isFetching = useSelector(getIsFetchingValue)
-    const sort = 'upcoming'
     const dispatch = useDispatch()
+    const sort = 'popular'
     useEffect(() => {
-        dispatch(FetchMovieListAC(1, 'upcoming'))
+        dispatch(FetchMovieListAC(1, 'popular'))
     }, [dispatch])
-
-
-
     if(isFetching){return <Preloader />}
-    return (
-        <MovieContainer movie={movie} title={'New Releases'} sort={sort}/>
+    return(
+        <MovieContainer movie={trendingMovie} title={'Trending'} sort={sort}/>
     )
 }

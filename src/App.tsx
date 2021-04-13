@@ -7,7 +7,9 @@ import {Nav} from "./components/nav/Nav";
 import {Releases} from "./components/newRelease/NewRelease";
 import {Result} from "./components/result/Result";
 import {Search} from "./components/search/Search";
-
+import {Watchlist} from "./components/watchlist/Watchlist"
+import {Trending} from "./components/trending/Trending";
+import {Rated} from "./components/topRated/Rated";
 
 function App() {
   return (
@@ -16,13 +18,15 @@ function App() {
           <Search />
           <Nav />
               <div className={styles.appWrapperContent}>
-                  <Route path='/main' render={() => <Releases/>}/>
-                  <Route path='/trending' render={() => <div>trending</div>}/>
-                  <Route path='/soon' render={() => <div>soon</div>}/>
-                  <Route path='/favorite' render={() => <div>favorite</div>}/>
+                  <Route exact path="/">
+                      <Redirect to="/main" />
+                  </Route>
+                  <Route path='/main/:page?' render={() => <Releases/>}/>
+                  <Route path='/trending' render={() => <Trending />}/>
+                  <Route path='/rated' render={() => <Rated />}/>
                   <Route path='/details/:id?' render={() => <Details /> }/>
                   <Route path='/result/' render={() => <Result /> }/>
-                  <Redirect from="/main" to="/result" />
+                  <Route path='/watchlist/' render={() => <Watchlist /> }/>
               </div>
 
       </div>

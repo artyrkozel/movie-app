@@ -5,7 +5,9 @@ body {
 	font-family: 'Work Sans', sans-serif;;
 	height: 100%;
 }
-
+p, div {
+	color: #c6c6c6
+}
 .wrapper {
 	display: flex;
 	flex-direction: column;
@@ -25,7 +27,32 @@ body {
   padding: 0 15px;
 }
 
-
-
+%buttonStyles {
+	cursor: pointer;
+	border-radius: 25px;
+	color: #c6c6c6;
+	float: right;
+	font-weight: 500;
+	margin: 0 20px 0 0;
+	padding: 10px 20px;
+	text-align: center;
+	transition: .5s;
+	border: none;
+	outline: none;
+	&:hover{
+		background-color: #c6c6c6;
+		color: #282828;
+	}
+}
+%divider{
+	cursor: pointer;
+	border-radius: 25px;
+	color: #c6c6c6;
+	background: rebeccapurple;
+	padding: 10px 20px;
+	display: block;
+	width: fit-content;
+	font-size: 20px;
+}
 
 

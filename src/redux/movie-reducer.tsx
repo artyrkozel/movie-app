@@ -1,13 +1,13 @@
+import {ChangeIsFetchingValueType, setMovieListType, FetchMovieListType, FetchSearchMovieType } from "./types"
+
 type genresItem = {
     id: number,
     name: string
 }
-
 type prodCounty = {
     iso_3166_1: string
     name: string
 }
-
 export type movieItemType = {
     adult: boolean
     backdrop_path: string
@@ -71,10 +71,6 @@ type setMovieDetailsType = {
     type: string
     details: any
 }
-type setMovieType = {
-    type: string
-    movie: any
-}
 type movieTrailerType = {
     id: string
     iso_639_1: string,
@@ -85,8 +81,9 @@ type movieTrailerType = {
     size: number,
     type: string
 }
-export const SET_MOVIE = 'SET_MOVIE'
-export const FETCH_UPCOMING_MOVIE = 'FETCH_UPCOMING_MOVIE'
+
+export const SET_MOVIE_LIST = 'SET_MOVIE_LIST'
+export const FETCH_MOVIE_lIST = 'FETCH_MOVIE_lIST'
 
 export const SET_DETAILS = 'SET_DETAILS'
 export const FETCH_DETAILS = 'FETCH_DETAILS'
@@ -99,34 +96,42 @@ export const SET_TRAILER = 'SET_TRAILER'
 
 export const CHANGE_IS_FETCHING = 'CHANGE_IS_FETCHING'
 
+export const SET_MOVIE_TO_LIST = 'SET_MOVIE_TO_LIST'
+export const INCREASE_COUNT = 'INCREASE_COUNT'
+export const RESET_COUNT = 'RESET_COUNT'
+
+
+
 let initialState = {
-    upcomingMovie: [] as Array<movieItemType>,
+    movieList : [] as Array<movieItemType>,
     movieDetail: {} as detailsMovie,
     search: [] as Array<searchItem>,
     movieTrailer: [] as Array<movieTrailerType>,
-    isFetching : false
+    isFetching : false,
+    watchlist: [] as Array<movieItemType>,
+    watchlistCount: 0 as number
 }
 
-export const ChangeIsFetchingValueAC = (value: boolean) => {
+export const ChangeIsFetchingValueAC = (value: boolean):ChangeIsFetchingValueType => {
     return {
         type: CHANGE_IS_FETCHING,
         value
     }
 }
-
-export const FetchMovieAC = () => {
+export const FetchMovieListAC = (movieId: number, sort: string):FetchMovieListType => {
     return {
-        type: FETCH_UPCOMING_MOVIE
+        type: FETCH_MOVIE_lIST,
+        movieId,
+        sort
     }
 }
-export const FetchSearchMovieAC = (value: any) => {
+export const FetchSearchMovieAC = (value: string):FetchSearchMovieType => {
     return {
         type: FETCH_SEARCH_MOVIE,
         value
     }
 }
-export const FetchTrailer = (movieId: any) => {
-
+export const FetchTrailer = (movieId: number) => {
     return {
         type: FETCH_TRAILER,
         movieId
@@ -138,7 +143,7 @@ export const FetchMovieDetailsAC = (movieId: any) => {
         movieId
     }
 }
-export const setMovieDetailsAC = (details: any):setMovieDetailsType => {
+export const setMovieDetailsAC = (details: detailsMovie):setMovieDetailsType => {
     return {
         type: SET_DETAILS,
         details
@@ -158,22 +163,37 @@ export const setTrailerAC = (details: any) => {
         details
     }
 }
-export const setMovieAC = (movie: Array<movieItemType>):setMovieType => {
+export const setMovieListAC = (movie: Array<movieItemType>): setMovieListType => {
     return {
-        type: SET_MOVIE,
+        type: SET_MOVIE_LIST,
         movie
+    }
+}
+export const setMovieToListAC = (movie: movieItemType) => {
+    return {
+        type: SET_MOVIE_TO_LIST,
+        movie
+    }
+}
+export const increaseCountAC = () => {
+    return {
+        type: INCREASE_COUNT,
+    }
+}
+export const resentCountAC = () => {
+    return {
+        type: RESET_COUNT,
     }
 }
 
 type InitialType = typeof initialState
 
-
 const movieReducer = (state: InitialType = initialState, action: any): InitialType => {
     switch (action.type) {
-        case SET_MOVIE:
+        case SET_MOVIE_LIST:
             return {
                 ...state,
-                upcomingMovie: action.movie,
+                movieList: action.movie
             }
         case SET_DETAILS:
             return {
@@ -195,9 +215,26 @@ const movieReducer = (state: InitialType = initialState, action: any): InitialTy
                 ...state,
                 isFetching: action.value
             }
+        case SET_MOVIE_TO_LIST:{
+            return {
+                ...state,
+                watchlist: [...state.watchlist, action.movie]
+            }
+        }
+        case INCREASE_COUNT:{
+            return {
+                ...state,
+                watchlistCount: state.watchlistCount + 1
+            }
+        }
+        case RESET_COUNT:{
+            return {
+                ...state,
+                watchlistCount: state.watchlistCount = 0
+            }
+        }
         default:
             return state
     }
 }
-
 export default movieReducer

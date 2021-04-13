@@ -1,16 +1,20 @@
+@import "src/scss/global";
+
 .movieItem{
   .movieItemInner{
     display: flex;
     .listDetails{
+      display: flex;
+      flex-direction: column;
       .listDetailsItem{
         margin-top: 15px;
         p {
           margin-bottom: 7px;
         }
         button {
-          background: transparent;
-          border: 1px solid #fff;
-          padding: 5px;
+          @extend %buttonStyles;
+          background: rebeccapurple;
+          margin-top: 5px;
         }
         span{
           font-weight: 700;
@@ -24,9 +28,10 @@
   .movieInfo{
     display: block;
     width: fit-content;
-    padding-left: 35px;
+    padding-left: 70px;
     .voteStatistics{
       display: flex;
+      margin-bottom: 20px;
       .voteAverage{
         display: flex;
         flex-direction: column;
@@ -38,8 +43,23 @@
         }
     }
     }
+    .mainTitle{
+      margin-bottom: 10px;
+    }
     .storyLine{
-      margin-top: 20px;
+      h2 {
+        @extend %divider;
+        margin-bottom: 15px;
+      }
+      p{
+        margin-bottom: 20px;
+      }
+    }
+    .trailerItem{
+      h2{
+        @extend %divider;
+        margin-bottom: 15px;
+      }
     }
   }
 }

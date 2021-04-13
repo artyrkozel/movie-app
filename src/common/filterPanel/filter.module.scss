@@ -1,7 +1,7 @@
 .releasesNav{
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   justify-content: center;
   .subTitle{
     margin-right: 20px;
@@ -19,6 +19,7 @@
     text-align: center;
     width: 110px;
     transition: .5s;
+    border: none;
     &:hover{
       background-color: rebeccapurple;
       color: white;

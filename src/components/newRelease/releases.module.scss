@@ -1,17 +1,26 @@
 @import "src/scss/vars";
 .releases{
   .mainTitle {
+    position: relative;
     margin-bottom: 20px;
     margin-right: 20px;
     color: white;
     text-align: center;
-    .subTitle{
-
+    h2{
+      position: relative;
+      font-size: 40px;
+      top: 41px;
+    }
+    h3{
+      position: relative;
+      opacity: .1;
+      font-size: 60px;
+      transform: translate(0, -45%);
     }
   }
   .releasesInner{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
   }
 }
